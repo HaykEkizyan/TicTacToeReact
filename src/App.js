@@ -13,18 +13,20 @@ class App extends Component {
 
   getWinner() {
     let winLines = [
-      ['0', '1', '2'],
-      ['3', '4', '5'],
-      ['6', '7', '8'],
-      ['0', '3', '6'],
-      ['1', '4', '7'],
-      ['2', '5', '8'],
-      ['0', '4', '8'],
-      ['2', '4', '6']
+      ['0', '1', '2'], ['3', '4', '5'], ['6', '7', '8'],   // horizontal lines
+      ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'],   // vertical lines
+      ['0', '4', '8'], ['2', '4', '6']                     // diagonal lines
     ]
+
+    this.checkMatch(winLines)
+
+  }
+
+  checkMatch(winLines) {
     for(let index = 0; index < winLines.length; index++) {
       const [a, b, c] = winLines[index];
-      if(this.state.boxes[a] && this.state.boxes[a] === this.state.boxes[b] && this.state.boxes[a] === this.state.boxes[c]) {
+      let boxes = this.state.boxes;
+      if(boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
         alert(`${this.state.player} won!`);
         this.setState({
           winner: this.state.player
@@ -42,32 +44,41 @@ class App extends Component {
         player: this.state.player === "X" ? "O" : "X"
       })
 
-      this.getWinner()
+      this.getWinner();
 
     }
   }
 
+  replay() {
+    this.setState({
+      player: null,
+      winner: null,
+      boxes: Array(9).fill(null)
+    })
+  }
+
   render() {
-    const Box = this.state.boxes.map(
+    const board = this.state.boxes.map(
       (box, index) => 
-        <div className="box" 
-        key={index} 
-        onClick={() => this.handleClick(index)}>
-          {box}
-      </div>
+        <div className="box"
+          key={index} 
+          onClick={() => this.handleClick(index)}>
+            {box}
+        </div>
     )
     return (
-      <div className="container">
-      <span id = "turn">Play</span>        
-        <div className="boxes">
-          {Box}
-        </div>
-      </div>    
+      <div className="container"> 
+      <span className="turn">Play</span>        
+        {board}
+        <button 
+          disabled={!this.state.winner} 
+          onClick={() => this.replay()}
+        >
+          Play again
+        </button>
+      </div>  
     );
   }
 }
 
 export default App;
-
-
-
