@@ -1,0 +1,37 @@
+body {
+	margin: 0;
+}
+
+*{
+	box-sizing: border-box
+}
+
+.container{
+	width: 300px; 
+	overflow: hidden; 
+	margin: 50px auto 0 auto;
+}
+
+span{
+	width: 100%; 
+	display: block; 
+	text-align: center;
+	font-family: sans-serif; 
+	color: #fff; 
+	font-size: 25px;
+	background: #2fac39;
+}
+
+
+.box{
+	float: left; 
+	width: 100px;
+	height: 100px; 
+	border: 1px solid #000;
+	transition: all .25s ease-in-out; 
+	font-family: sans-serif; 
+	font-size: 75px; 
+	text-align: center; 
+	line-height: 100px; 
+	cursor: pointer;
+}
