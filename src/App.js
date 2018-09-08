@@ -6,7 +6,7 @@ class App extends Component {
     super(props);
     this.state = {
       boxes: Array(9).fill(null),
-      player: "X" || "O",
+      player: "X",
       winner: null
     } 
   }
@@ -18,7 +18,7 @@ class App extends Component {
       ['0', '4', '8'], ['2', '4', '6']                     // diagonal lines
     ]
 
-    this.checkMatch(winLines)
+    this.checkMatch(winLines);
 
   }
 
@@ -41,7 +41,8 @@ class App extends Component {
       newBoxes[index] = this.state.player;
       this.setState({
         boxes: newBoxes,
-        player: this.state.player === "X" ? "O" : "X"
+        player: this.state.player === "X" ? "O" : "X",
+        
       })
 
       this.getWinner();
@@ -51,7 +52,7 @@ class App extends Component {
 
   replay() {
     this.setState({
-      player: null,
+      player: "O",
       winner: null,
       boxes: Array(9).fill(null)
     })
@@ -62,13 +63,14 @@ class App extends Component {
       (box, index) => 
         <div className="box"
           key={index} 
-          onClick={() => this.handleClick(index)}>
-            {box}
+          onClick={() => this.handleClick(index)}
+        >
+          {box}
         </div>
     )
-    return (
+    return ( 
       <div className="container"> 
-      <span className="turn">Play</span>        
+      <span id="turn">Play</span>        
         {board}
         <button 
           disabled={!this.state.winner} 
