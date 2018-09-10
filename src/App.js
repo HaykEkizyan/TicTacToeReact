@@ -43,7 +43,6 @@ class App extends Component {
       this.setState({
         boxes: newBoxes,
         player: this.state.player === "X" ? "O" : "X",
-        
       })
 
       this.getWinner();
@@ -63,7 +62,7 @@ class App extends Component {
 
   nextPlayer() {
     this.setState({
-      topBox: `{this.state.player} Turn Now`
+      topBox: `${this.state.player} Turn Now`
     })
   }
 
