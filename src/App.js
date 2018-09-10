@@ -56,13 +56,14 @@ class App extends Component {
     this.setState({
       player: "O",
       winner: null,
-      boxes: Array(9).fill(null)
+      boxes: Array(9).fill(null),
+      topBox: "Play"
     })
   }
 
   nextPlayer() {
     this.setState({
-      topBox: `${this.state.player} Turn Now`
+      topBox: `{this.state.player} Turn Now`
     })
   }
 
@@ -79,6 +80,7 @@ class App extends Component {
     return ( 
       <div className="container"> 
         <span
+          disabled={!this.state.winner}
           onClick={() => this.nextPlayer()}
         >
           {this.state.topBox}
