@@ -7,7 +7,8 @@ class App extends Component {
     this.state = {
       boxes: Array(9).fill(null),
       player: "X",
-      winner: null
+      winner: null,
+      topBox: "Play"
     } 
   }
 
@@ -23,8 +24,8 @@ class App extends Component {
   }
 
   checkMatch(winLines) {
-    for(let index = 0; index < winLines.length; index++) {
-      const [a, b, c] = winLines[index];
+    for(let i = 0; i < winLines.length; i++) {
+      const [a, b, c] = winLines[i];
       let boxes = this.state.boxes;
       if(boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
         alert(`${this.state.player} won!`);
@@ -46,6 +47,7 @@ class App extends Component {
       })
 
       this.getWinner();
+      this.nextPlayer();
 
     }
   }
@@ -55,6 +57,12 @@ class App extends Component {
       player: "O",
       winner: null,
       boxes: Array(9).fill(null)
+    })
+  }
+
+  nextPlayer() {
+    this.setState({
+      topBox: `${this.state.player} Turn Now`
     })
   }
 
@@ -70,10 +78,13 @@ class App extends Component {
     )
     return ( 
       <div className="container"> 
-      <span id="turn">Play</span>        
+        <span
+          onClick={() => this.nextPlayer()}
+        >
+          {this.state.topBox}
+        </span>        
         {board}
         <button 
-          disabled={!this.state.winner} 
           onClick={() => this.replay()}
         >
           Play again
