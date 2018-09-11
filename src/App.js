@@ -18,9 +18,8 @@ class App extends Component {
       ['0', '3', '6'], ['1', '4', '7'], ['2', '5', '8'],   // vertical lines
       ['0', '4', '8'], ['2', '4', '6']                     // diagonal lines
     ]
-
     this.checkMatch(winLines);
-
+    this.nextPlayer();
   }
 
   checkMatch(winLines) {
@@ -44,10 +43,7 @@ class App extends Component {
         boxes: newBoxes,
         player: this.state.player === "X" ? "O" : "X",
       })
-
       this.getWinner();
-      this.nextPlayer();
-
     }
   }
 
