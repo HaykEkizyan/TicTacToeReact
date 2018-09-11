@@ -19,7 +19,6 @@ class App extends Component {
       ['0', '4', '8'], ['2', '4', '6']                     // diagonal lines
     ]
     this.checkMatch(winLines);
-    this.nextPlayer();
   }
 
   checkMatch(winLines) {
@@ -28,6 +27,7 @@ class App extends Component {
       let boxes = this.state.boxes;
       if(boxes[a] && boxes[a] === boxes[b] && boxes[a] === boxes[c]) {
         alert(`${this.state.player} won!`);
+        alert("Thanks for playing");
         this.setState({
           winner: this.state.player
         })
@@ -44,6 +44,7 @@ class App extends Component {
         player: this.state.player === "X" ? "O" : "X",
       })
       this.getWinner();
+      this.nextPlayer();
     }
   }
 
@@ -57,9 +58,9 @@ class App extends Component {
   }
 
   nextPlayer() {
-    this.setState({
-      topBox: `${this.state.player} Turn Now`
-    })
+    this.state.player === "X" ? 
+    this.setState({topBox: `O Turn Now`}) : 
+    this.setState({topBox: `X Turn Now`})
   }
 
   render() {
